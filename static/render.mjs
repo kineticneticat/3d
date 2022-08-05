@@ -9,7 +9,8 @@ let player = {
     z: 0
 }
 let obj = [
-    Generate.Cube(0, 0, 0, 5, 5, 5)
+    Generate.Cube(-2.5, -2.5, -2.5, 2.5, 2.5, 2.5),
+    //Generate.Cube(0,0,0,0,0,0)
 ]
 console.log(obj)
 let keyW, keyA, keyS, keyD, keySp, keySh = false

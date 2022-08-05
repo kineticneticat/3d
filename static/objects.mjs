@@ -2,7 +2,7 @@ const scale = 20
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext("2d")
 /////////////////////////////////////////////
-export class Vertex {
+class Vertex {
     constructor(x, y, z) {
         this.x = x
         this.y = y
@@ -25,7 +25,7 @@ export class Vertex {
     }
 }
 /////////////////////////////////////////////
-export class Edge {
+class Edge {
     constructor(a, b) {
         this.a = a
         this.b = b
@@ -39,7 +39,23 @@ export class Edge {
     }
 }
 /////////////////////////////////////////////
-export class Obj {
+class Face {
+    constructor(v) {
+        this.v = v
+    }
+    draw() {
+        ctx.beginPath()
+        ctx.moveTo(this.v[0].prox, this.v[0].proy)
+        for (let i = 1; i<this.v.length;i++) {
+            ctx.lineTo(this.v[i].prox, this.v[i].proy)
+        }
+        ctx.closePath()
+        ctx.fill()
+
+    }
+}
+/////////////////////////////////////////////
+class Obj {
     constructor(Verts, Edges, Faces) {
         this.v = Verts
         this.e = Edges
@@ -57,7 +73,7 @@ export class Obj {
             this.f[i].draw()
         }
     }
-a
+
     move(dx, dy, dz) {
         for (let i=0;i<this.v.length;i++) {
             this.v[i].x += dx
@@ -77,10 +93,13 @@ export class Generatei {
             new Edge(v[0], v[1]), new Edge(v[1], v[3]), new Edge(v[3], v[2]), new Edge(v[2], v[0]), new Edge(v[4], v[5]), new Edge(v[5], v[7]), new Edge(v[7], v[6]), new Edge(v[6], v[4]), new Edge(v[0], v[4]), new Edge(v[1], v[5]), new Edge(v[2], v[6]), new Edge(v[3], v[7])
         ]
         let f = [
-    
+            new Face([v[0], v[1], v[3], v[2]])
         ]
     
         return new Obj(v, e, f)
+    }
+    Point(x, y, z) {
+        return new Obj(new Vertex(x, y, z), [], [])
     }
 }
 
